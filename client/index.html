@@ -6,7 +6,6 @@
         <script src="http://code.angularjs.org/1.1.5/angular.min.js"></script>
         <script src="ngStorage.min.js"></script>
         <script src="/socket.io/socket.io.js"></script>
-        <script src="script.js"></script>
         <link href="style.css" rel="stylesheet"></link>
     </head>
     <body class="dark-bg" data-ng-app="SurveyApp" data-ng-controller="Ctrl">
@@ -24,5 +23,6 @@
         <button type="button" class="btn btn-large no" ng-click="endSurvey()">End Survey</button>
         <button type="button" class="btn btn-large yes" ng-click="newVoter('yes')">New YES voter</button>
         <button type="button" class="btn btn-large no" ng-click="newVoter('no')">New NO voter</button>
+        <script src="script.js"></script>
     </body>
 </html>
