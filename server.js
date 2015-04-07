@@ -9,7 +9,7 @@ var bodyParser = require('body-parser')
 //Insecure by the way
 router.use( express.bodyParser() );
 
-router.use(express.static(path.resolve(__dirname, 'src/client')));
+router.use(express.static(path.resolve(__dirname, 'client')));
 
 server.listen(22565, "0.0.0.0", function(){
   var addr = server.address();
