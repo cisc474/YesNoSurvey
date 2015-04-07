@@ -53,9 +53,9 @@ controller('Ctrl', function(
         $scope.user.reset();
     });
 
-    socket.emit('status');
-    
     $scope.user = new Voter($scope.$storage.id);
+    
+    socket.emit('status', {id: $scope.user.id});
 
     $scope.vote = function(vote){
         if ($scope.survey.status !== "inactive"){ 
