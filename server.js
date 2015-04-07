@@ -79,12 +79,12 @@ io.sockets.on('connection', function(socket){
  
   var sendVote = function(id){
      if (survey.votes.hasOwnProperty(id)){
-        socket.emit('your-status', {
+        io.sockets.in(id).emit('your-status', {
             status : 'voted',
             vote: survey.votes[id]
         });
      } else {
-        socket.emit('your-status', {
+        io.sockets.in(id).emit('your-status', {
             status : 'not voted',
             vote: "NA"
         });
@@ -92,6 +92,7 @@ io.sockets.on('connection', function(socket){
   }
 
   socket.on('status', function(data){
+     socket.join(data.id);
      socket.emit('survey-status', survey.toJSON());
      sendVote(data.id);
   });
