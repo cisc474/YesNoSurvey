@@ -49,7 +49,7 @@ controller('Ctrl', function(
         $scope.$apply();
     });
 
-    socket.on('reset', function(data){
+    socket.on('vote-reset', function(data){
         $scope.user.reset();
     });
 
@@ -63,8 +63,6 @@ controller('Ctrl', function(
             socket.emit('cast-vote', $scope.user);
         }
     };
-
-    socket.emit('begin-survey');
 
     $scope.endSurvey = function(){
         socket.emit('end-survey');

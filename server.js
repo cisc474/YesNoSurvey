@@ -78,20 +78,18 @@ io.sockets.on('connection', function(socket){
   };  
   
   socket.on('status', function(data){
+     socket.emit('survey-status', survey.toJSON());
      if (survey.votes.hasOwnProperty(data.id)){
         socket.emit('your-status', {
-            id: data.id,
             status : 'voted',
             vote: survey.votes[data.id]
         });
      } else {
         socket.emit('your-status', {
-            id: data.id,
             status : 'not voted',
             vote: "NA"
         });
      };
-     socket.emit('survey-status', survey.toJSON());
   });
 
   socket.on('admin-status', function(){
@@ -111,7 +109,7 @@ io.sockets.on('connection', function(socket){
   socket.on('begin-survey', function(){
      survey = new Survey();
      survey.begin();
-     io.sockets.emit('reset');
+     io.sockets.emit('vote-reset');
      broadcast();
   });
 
