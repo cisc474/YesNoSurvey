@@ -43,18 +43,26 @@ var Survey = function(){
                 results.participants += 1;
             }
         }
-        that.results = results;
+        return results;
     };
 
     this.end = function(){
         that.status = "inactive";
-        that.tally();
+        that.results = that.tally();
     };
 
     this.toJSON = function(){
         var obj = {};
         obj.status = that.status;
         obj.results = that.results;
+        obj.participants = that.participants;
+        return obj;
+    }
+    
+    this.toSecretJSON = function(){
+        var obj = {};
+        obj.status = that.status;
+        obj.results = that.tally();
         obj.participants = that.participants;
         return obj;
     }
@@ -68,8 +76,27 @@ io.sockets.on('connection', function(socket){
   var broadcast = function(){
      io.sockets.emit('survey-status', survey.toJSON());
   };  
+  
+  socket.on('status', function(data){
+     if (survey.votes.hasOwnProperty(data.id)){
+        socket.emit('your-status', {
+            id: data.id,
+            status : 'voted',
+            vote: survey.votes[data.id]
+        });
+     } else {
+        socket.emit('your-status', {
+            id: data.id,
+            status : 'not voted',
+            vote: "NA"
+        });
+     };
+     socket.emit('survey-status', survey.toJSON());
+  });
 
-  socket.on('status', broadcast);
+  socket.on('admin-status', function(){
+     socket.emit('secret-status', survey.toSecretJSON());
+  });
   
   socket.on('cast-vote', function(user){
      survey.vote(user);

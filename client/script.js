@@ -42,6 +42,12 @@ controller('Ctrl', function(
         $scope.survey = data; 
         $scope.$apply();
     });
+    
+    socket.on('your-status', function(data){ 
+        $scope.user.vote = data.vote;
+        $scope.user.status = data.status;
+        $scope.$apply();
+    });
 
     socket.on('reset', function(data){
         $scope.user.reset();
