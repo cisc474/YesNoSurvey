@@ -76,13 +76,12 @@ io.sockets.on('connection', function(socket){
   var broadcast = function(){
      io.sockets.emit('survey-status', survey.toJSON());
   };  
-  
-  socket.on('status', function(data){
-     socket.emit('survey-status', survey.toJSON());
-     if (survey.votes.hasOwnProperty(data.id)){
+ 
+  var sendVote = function(id){
+     if (survey.votes.hasOwnProperty(id)){
         socket.emit('your-status', {
             status : 'voted',
-            vote: survey.votes[data.id]
+            vote: survey.votes[id]
         });
      } else {
         socket.emit('your-status', {
@@ -90,6 +89,11 @@ io.sockets.on('connection', function(socket){
             vote: "NA"
         });
      };
+  }
+
+  socket.on('status', function(data){
+     socket.emit('survey-status', survey.toJSON());
+     sendVote(data.id);
   });
 
   socket.on('admin-status', function(){
@@ -98,6 +102,7 @@ io.sockets.on('connection', function(socket){
   
   socket.on('cast-vote', function(user){
      survey.vote(user);
+     sendVote(user.id);
      broadcast();
   });
 
