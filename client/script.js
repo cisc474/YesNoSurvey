@@ -23,9 +23,7 @@ var Voter = function(id){
 }
 
 var socket = io.connect();
-
 var survey = {status:"inactive"};
-
 
 angular.module('SurveyApp', [
         'ngStorage'
@@ -33,16 +31,27 @@ angular.module('SurveyApp', [
 controller('Ctrl', function(
             $scope,
             $localStorage
-){
+            ){
+
+    $scope.connected = socket.socket.connected;
+
     $scope.$storage = $localStorage.$default({
         id: generateUUID()
+    });
+
+    socket.on('connect', function(){
+        $scope.connected = true;
+    });
+
+    socket.on('disconnect', function(){
+        $scope.connected = false;
     });
 
     socket.on('survey-status', function(data){ 
         $scope.survey = data; 
         $scope.$apply();
     });
-    
+
     socket.on('your-status', function(data){ 
         $scope.user.vote = data.vote;
         $scope.user.status = data.status;
@@ -54,7 +63,7 @@ controller('Ctrl', function(
     });
 
     $scope.user = new Voter($scope.$storage.id);
-    
+
     socket.emit('status', {id: $scope.user.id});
 
     $scope.vote = function(vote){
@@ -71,7 +80,7 @@ controller('Ctrl', function(
     $scope.newSurvey = function(){
         socket.emit('begin-survey');
     };
-    
+
     $scope.newVoter = function(vote){
         var tempUser = new Voter(generateUUID());
         tempUser.castVote(vote);
