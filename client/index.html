@@ -15,7 +15,8 @@
         <div class="connected" ng-if="connected">
             <h3 class="secondary status">{{user.status === "voted" ? "You voted "+user.vote +"." : "You have not yet voted."}}</h3>
             <h3 class="secondary status"> {{survey.status === "inactive" ? "Survey is currently inactive." : "Survey is active, please vote now."}}</h3>
-            <h3 class="secondary results">Results: Yes - {{survey.results.yes}}. No - {{survey.results.no}}. Participants - {{survey.participants}}</h3>
+            <h3 class="secondary results">Results: Yes = {{survey.results.yes}}. No = {{survey.results.no}}.</h3>
+            <h3 class="secondary results">Participants = {{survey.participants}}</h3>
         </div>
         <div class="disconnected" ng-if="!connected">
             <h2 class="no">Trying to connect...</h2>
