@@ -79,12 +79,12 @@ io.sockets.on('connection', function(socket){
  
   var sendVote = function(id){
      if (survey.votes.hasOwnProperty(id)){
-        io.sockets.in(id).emit('your-status', {
+        io.to(id).emit('your-status', {
             status : 'voted',
             vote: survey.votes[id]
         });
      } else {
-        io.sockets.in(id).emit('your-status', {
+        io.to(id).emit('your-status', {
             status : 'not voted',
             vote: "NA"
         });
