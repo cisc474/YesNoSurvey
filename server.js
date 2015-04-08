@@ -75,6 +75,7 @@ io.sockets.on('connection', function(socket){
   
   var broadcast = function(){
      io.sockets.emit('survey-status', survey.toJSON());
+     io.sockets.in('admin').emit('secret-status', survey.toSecretJSON());
   };  
  
   var sendVote = function(id){
@@ -98,6 +99,8 @@ io.sockets.on('connection', function(socket){
   });
 
   socket.on('admin-status', function(){
+     socket.join('admin');
+     socket.join(data.id);
      socket.emit('secret-status', survey.toSecretJSON());
   });
   

@@ -81,10 +81,4 @@ controller('Ctrl', function(
         socket.emit('begin-survey');
     };
 
-    $scope.newVoter = function(vote){
-        var tempUser = new Voter(generateUUID());
-        tempUser.castVote(vote);
-        socket.emit('cast-vote', tempUser);
-    }
-
 });
