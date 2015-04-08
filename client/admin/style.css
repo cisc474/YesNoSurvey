@@ -1,0 +1,58 @@
+.primary {
+  color: #00539f;
+}
+.secondary {
+  color: #ffd200;
+}
+.dark {
+  color: #003976;
+}
+.dark-bg {
+  background-color: #003976;
+}
+.primary-bg {
+  background-color: #00539f;
+}
+.secondary-bg {
+  background-color: #ffd200;
+}
+.yes {
+  background-color: #5a8e22;
+  border: 2px solid #c4d8e5;
+  background: -webkit-linear-gradient(left top, #bed600 8%, #5a8e22);
+  background: -moz-linear-gradient(left top, #bed600 8%, #5a8e22);
+  background: -o-linear-gradient(left top, #bed600 8%, #5a8e22);
+  background: -ms-linear-gradient(left top, #bed600 8%, #5a8e22);
+  background: linear-gradient(to right bottom, #bed600 8%, #5a8e22);
+}
+.no {
+  background-color: #af1e2d;
+  border: 2px solid #bdbdbd;
+  background: -webkit-linear-gradient(top left, #ef1e2d 20%, #af1e2d);
+  background: -moz-linear-gradient(top left, #ef1e2d 20%, #af1e2d);
+  background: -o-linear-gradient(top left, #ef1e2d 20%, #af1e2d);
+  background: -ms-linear-gradient(top left, #ef1e2d 20%, #af1e2d);
+  background: linear-gradient(to bottom right, #ef1e2d 20%, #af1e2d);
+}
+.btn-large {
+  font: bold 20px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  display: inline-block;
+  font-weight: bold;
+  width: 5em;
+  height: 5em;
+  margin: 0.5em;
+}
+.yes:hover {
+  text-shadow: -1px -1px 0 #bed600, 1px -1px 0 #bed600, -1px 1px 0 #bed600, 1px 1px 0 #bed600;
+  border: 5px solid #bed600;
+}
+.no:hover {
+  text-shadow: -1px -1px 0 #bdbdbd, 1px -1px 0 #bdbdbd, -1px 1px 0 #bdbdbd, 1px 1px 0 #bdbdbd;
+  border: 5px solid #bdbdbd;
+}
+button:focus {
+  outline: none;
+  border: 8px solid #eeebc5 !important;
+}
