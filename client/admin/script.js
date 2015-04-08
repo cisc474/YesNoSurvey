@@ -47,7 +47,7 @@ controller('Ctrl', function(
         $scope.connected = false;
     });
 
-    socket.on('survey-status', function(data){ 
+    socket.on('secret-status', function(data){ 
         $scope.survey = data; 
         $scope.$apply();
     });
@@ -64,7 +64,7 @@ controller('Ctrl', function(
 
     $scope.user = new Voter($scope.$storage.id);
 
-    socket.emit('status', {id: $scope.user.id});
+    socket.emit('admin-status', {id: $scope.user.id});
 
     $scope.vote = function(vote){
         if ($scope.survey.status !== "inactive"){ 
