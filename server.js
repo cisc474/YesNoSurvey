@@ -89,7 +89,7 @@ io.sockets.on('connection', function(socket){
             vote: "NA"
         });
      };
-  }
+  };
 
   socket.on('status', function(data){
      socket.join(data.id);
