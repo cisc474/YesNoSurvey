@@ -1,9 +1,3 @@
-/* 
- * 
- * I generated this from a stylus file which I'll include in here too
- *
- * */
-
 .primary {
   color: #00539f;
 }
@@ -12,6 +6,9 @@
 }
 .dark {
   color: #003976;
+}
+.dark-text {
+  color: black;
 }
 .dark-bg {
   background-color: #003976;

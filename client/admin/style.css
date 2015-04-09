@@ -7,6 +7,9 @@
 .dark {
   color: #003976;
 }
+.dark-text {
+  color: black;
+}
 .dark-bg {
   background-color: #003976;
 }

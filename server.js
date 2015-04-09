@@ -70,7 +70,7 @@ var Survey = function(){
             }
         }
         if (results.participants > 0) {
-            results.percentage = (results.yes*100/results.participants).toFixed(2);
+            results.percentage = Math.floor(results.yes*100.0 /results.participants);
         }
         return results;
     };
