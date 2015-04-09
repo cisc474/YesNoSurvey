@@ -1,3 +1,4 @@
+//this method was taken from a stack overflow response, I liked the d + Math.random() part.
 var generateUUID = function(){
     var d = new Date().getTime();
     var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
@@ -8,6 +9,7 @@ var generateUUID = function(){
     return uuid;
 };
 
+//my Voter class which has a simple reset and castVote method
 var Voter = function(id){
     var that = this;
     this.id = id;
@@ -22,6 +24,8 @@ var Voter = function(id){
     this.reset();
 }
 
+//start an io connection
+//also a dummy survey to start
 var socket = io.connect();
 var survey = {status:"inactive"};
 
@@ -32,13 +36,15 @@ controller('Ctrl', function(
             $scope,
             $localStorage
             ){
-
-    $scope.connected = socket.socket.connected;
-
+//I'm using an ngStorage library for my localStorage
+//it would probably be cooler to use vanilla JS for this project
     $scope.$storage = $localStorage.$default({
         id: generateUUID()
     });
 
+//this was a nice method to check if a socket is connected
+    $scope.connected = socket.socket.connected;
+//then I can update when the connection is established or lost
     socket.on('connect', function(){
         $scope.connected = true;
     });
@@ -46,45 +52,33 @@ controller('Ctrl', function(
     socket.on('disconnect', function(){
         $scope.connected = false;
     });
-
+//react to broadcast survey data
     socket.on('survey-status', function(data){ 
         $scope.survey = data; 
         $scope.$apply();
     });
-
+//also allow specific data about my vote (useful for multiple tab voters)
     socket.on('your-status', function(data){ 
         $scope.user.vote = data.vote;
         $scope.user.status = data.status;
         $scope.$apply();
     });
-
+//when a new survey starts I should reset
     socket.on('vote-reset', function(data){
         $scope.user.reset();
     });
-
+//defining this user as a voter with UUID
     $scope.user = new Voter($scope.$storage.id);
-
+//asking the server for my data
     socket.emit('status', {id: $scope.user.id});
-
+//a method to react to button clicks
     $scope.vote = function(vote){
-        if ($scope.survey.status !== "inactive"){ 
+        if ($scope.survey.status !== "inactive"){
+            //cast the vote as a user
             $scope.user.castVote(vote);
+            //share the vote with the server
             socket.emit('cast-vote', $scope.user);
         }
     };
-
-    $scope.endSurvey = function(){
-        socket.emit('end-survey');
-    };
-
-    $scope.newSurvey = function(){
-        socket.emit('begin-survey');
-    };
-
-    $scope.newVoter = function(vote){
-        var tempUser = new Voter(generateUUID());
-        tempUser.castVote(vote);
-        socket.emit('cast-vote', tempUser);
-    }
 
 });

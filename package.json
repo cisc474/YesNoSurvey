@@ -1,0 +1,16 @@
+{
+  "name": "yesno-survey",
+  "version": "0.1.0",
+  "description": "Yes No Survey",
+  "main": "server.js",
+  "keywords": [
+    "socketio",
+    "survey"
+  ],
+  "dependencies": {
+    "express": ">= 0.0.0",
+    "socketio":">= 0.0.0"
+  }
+  "author": "Andy Novocin",
+  "license": "BSD-2-Clause"
+}

@@ -2,17 +2,24 @@
 <html>
     <head>
         <title>BHIC Survey System</title>
+        <!-- The META viewport tag can be used to adjust the scaling of the page 
+        based on your device width -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script src="http://code.angularjs.org/1.1.5/angular.min.js"></script>
         <script src="ngStorage.min.js"></script>
         <script src="/socket.io/socket.io.js"></script>
         <link href="style.css" rel="stylesheet"></link>
     </head>
+    <!-- My classes are used for CSS stylings, so secondary is the non primary color -->
+    <!-- Also angular is just going to have a "Ctrl" controller no routes this time-->
     <body class="dark-bg" data-ng-app="SurveyApp" data-ng-controller="Ctrl">
         <h1 class="secondary">Yes/No Survey</h1>
+        <!-- For the votes I use the same function with different string inputs -->
         <button type="button" class="btn btn-large yes" ng-click="vote('yes')">Yes</button>
         <button type="button" class="btn btn-large no" ng-click="vote('no')">No</button>
         <div class="connected" ng-if="connected">
+            <!-- this section is only used when connected is true, also I'm using 
+            inline-if statements to react to statuses -->
             <h3 class="secondary status">{{user.status === "voted" ? "You voted "+user.vote +"." : "You have not yet voted."}}</h3>
             <h3 class="secondary status"> {{survey.status === "inactive" ? "Survey is currently inactive." : "Survey is active, please vote now."}}</h3>
             <h3 class="secondary results">Results: Yes = {{survey.results.yes}}. No = {{survey.results.no}}.</h3>

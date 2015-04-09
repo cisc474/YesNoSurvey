@@ -1,0 +1,72 @@
+@import 'nib'
+
+//these are useful for any UD based projects
+//I like making this pallete which are real colors
+//then I'll wrap those in css classes which don't specify any particular color
+//of course when push came to shove I ended up using variables and even hard wired values
+ud-blue = #00539f
+ud-yellow = #ffd200
+ud-dark = #003976
+ud-red = #af1e2d
+ud-orange = #ef8200
+ud-lime = #bed600
+ud-green = #5a8e22
+ud-lightblue = #00a0df
+ud-gray = #bdbdbd
+ud-dark-gray = #747679
+ud-beige = #eeebc5
+ud-sky = #c4d8e5
+ud-gold = #b7a66d
+ud-neutral-blue = #5a7e92
+
+yes = ud-green
+no = ud-red
+
+.primary
+  color ud-blue
+
+.secondary
+  color ud-yellow
+
+.dark
+  color ud-dark
+
+.dark-bg
+  background-color ud-dark
+
+.primary-bg
+  background-color ud-blue
+
+.secondary-bg
+  background-color ud-yellow
+
+.yes
+  background-color yes
+  border 2px solid ud-sky
+  background linear-gradient(left top, 8% ud-lime, ud-green)
+
+.no
+  background-color no
+  border 2px solid ud-gray
+  background linear-gradient(top left, 20% #ef1e2d, ud-red)
+  
+.btn-large
+  font bold 20px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+  border-radius 5px
+  display inline-block
+  font-weight bold
+  width 5em
+  height 5em
+  margin .5em
+
+.yes:hover
+  shadow-stroke(ud-lime)
+  border 5px solid ud-lime
+
+.no:hover
+  shadow-stroke(ud-gray)
+  border 5px solid ud-gray
+
+button:focus
+  outline none
+  border 8px solid ud-beige !important
