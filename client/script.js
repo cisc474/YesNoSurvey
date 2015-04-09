@@ -27,7 +27,7 @@ var Voter = function(id){
 //start an io connection
 //also a dummy survey to start
 var socket = io.connect();
-var survey = {status:"inactive"};
+var survey = {status:"inactive" };
 
 angular.module('SurveyApp', [
         'ngStorage'

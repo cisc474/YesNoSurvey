@@ -22,7 +22,7 @@ var Survey = function(){
 //some default values for an inactive, secret results survey
     this.status = "inactive";
     this.votes = {};
-    this.results = {yes: "NA", no: "NA"};
+    this.results = {yes: "NA", no: "NA", percentage: "NA"};
     this.participants = 0;
 //the vote method accepts a "user" which leans on the user 
 //having an 'id' attribute (a UUID in fact)
@@ -60,7 +60,7 @@ var Survey = function(){
     //I extracted it so that it can be used to give the admins a live tally
     //but also to give the public a tally at survey end
     this.tally = function(){
-        var results = { yes: 0, no: 0, participants : 0};
+        var results = { yes: 0, no: 0, participants : 0, percentage: 0.00};
         //this loop is how to iterate properties in a JSON object
         //I always end up google searching it to be sure, don't know why...
         for (var key in that.votes){
@@ -68,6 +68,9 @@ var Survey = function(){
                 results[that.votes[key]] += 1;
                 results.participants += 1;
             }
+        }
+        if (results.participants > 0) {
+            results.percentage = (results.yes*100/results.participants).toFixed(2);
         }
         return results;
     };
